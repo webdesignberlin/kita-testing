@@ -23,24 +23,32 @@ export const instance = initializeApp(firebaseConfig);
 export const db = getFirestore(instance);
 enableIndexedDbPersistence(db);
 
-export const getProviders = await getDocs(collection(db, 'providers'));
+export const getProviders = async () => await getDocs(collection(db, 'providers'));
 // export const getTests = await getDocs(collection(db, 'tests'));
-export const getTests = await getDocs(query(collection(db, 'tests'), orderBy('date', 'desc')));
-export const providers = getProviders.docs.map((doc) => ({
-  id: doc.id,
-  ...doc.data(),
-}));
-export const tests = () => getTests.docs.map((doc) => {
-  const {
-    provider,
-    date,
-  } = doc.data();
-  return {
+export const getTests = async () => await getDocs(query(collection(db, 'tests'), orderBy('date', 'desc')));
+export const providers = async () => {
+  const providers = await getProviders();
+  const docs = providers.docs;
+  return docs.map((doc) => ({
     id: doc.id,
-    date,
-    providerId: provider.id,
-  };
-});
+    ...doc.data(),
+  }));
+};
+export const tests = async () => {
+  const coll = await getTests();
+  const docs = coll.docs;
+  return docs.map((doc) => {
+    const {
+      provider,
+      date,
+    } = doc.data();
+    return {
+      id: doc.id,
+      date,
+      providerId: provider.id,
+    };
+  });
+};
 
 export const addTest = async ({ date, providerId } = {}) => {
   await addDoc(collection(db, 'tests'), {

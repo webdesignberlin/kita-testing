@@ -1,6 +1,10 @@
 <script setup>
 import { ref } from 'vue';
 import { providers, addTest } from '../api.js';
+const provs = ref([]);
+providers().then((res) => {
+  provs.value = res;
+});
 const model = ref({
   providerId: null,
   date: new Date().toISOString().slice(0,16),
@@ -23,7 +27,7 @@ const submit = () => addTest(model.value);
           required
           v-model="model.providerId">
         <option
-            v-for="provider in providers"
+            v-for="provider in provs"
             :key="provider.id"
             :value="provider.id">
           {{ provider.name }}
