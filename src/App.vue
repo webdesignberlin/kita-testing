@@ -51,13 +51,16 @@ html {
 }
 
 .layer {
+  --layer-add-size: 50vh;
+  --layer-list-size: 50vh;
   display: grid;
   height: 100vh;
   max-height: 100vh;
   width: 100vw;
   overflow: hidden;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(2, 50vh);
+  /* grid-template-rows: var(--layer-add-size) var(--layer-list-size); */
+  grid-template-rows: 1fr 1fr;
   place-items: stretch;
 }
 .layer__button {
@@ -79,13 +82,16 @@ html {
   -8px -8px 16px #83e1e0;
 }
 .layer--list {
-  grid-template-rows: 9rem 1fr;
+  --layer-add-size: 9rem;
+  --layer-list-size: calc(100vh - var(--layer-add-size));
 }
 .layer__add {
   display: grid;
   padding: 1rem;
   place-items: center;
   background: #F7F4EA;
+  height: var(--layer-add-size);
+  transition: height 0.4s ease;
 }
 .layer__list {
   display: grid;
@@ -93,6 +99,8 @@ html {
   place-items: center;
   overflow: scroll;
   background: #75C9C8;
+  height: var(--layer-list-size);
+  transition: height 0.4s ease;
 }
 
 button {

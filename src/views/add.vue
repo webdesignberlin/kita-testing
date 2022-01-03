@@ -16,7 +16,9 @@ const submit = () => {
 };
 </script>
 <template>
-  <form @submit.prevent="submit()">
+  <form
+      class="form"
+      @submit.prevent="submit()">
     <label class="field">
       <span class="field__text">Datum</span>
       <input
@@ -42,6 +44,9 @@ const submit = () => {
   </form>
 </template>
 <style>
+.form {
+  width: 100%;
+}
 .field {
   display: block;
   margin: 2rem 0;
@@ -51,6 +56,7 @@ const submit = () => {
   display: block;
 }
 .field__input {
+  appearance: none;
   padding: 0.6rem 1rem;
   width: 100%;
   border: none;
