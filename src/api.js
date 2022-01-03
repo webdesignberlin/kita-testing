@@ -8,7 +8,7 @@ import {
   enableIndexedDbPersistence,
   query,
   orderBy,
-} from "firebase/firestore";
+} from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_APP_API_KEY,
