@@ -1,6 +1,7 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, defineEmits } from 'vue';
 import { providers, addTest } from '../api.js';
+const emit = defineEmits(['added'])
 const provs = ref([]);
 providers().then((res) => {
   provs.value = res;
@@ -9,7 +10,10 @@ const model = ref({
   providerId: null,
   date: new Date().toISOString().slice(0,16),
 });
-const submit = () => addTest(model.value);
+const submit = () => {
+  addTest(model.value);
+  emit('added');
+};
 </script>
 <template>
   <form @submit.prevent="submit()">

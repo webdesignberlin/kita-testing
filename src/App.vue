@@ -20,7 +20,9 @@ const setView = (name) => {
           class="layer__button"
           v-if="currentView !== 'add'"
           @click="setView('add')">+</button>
-      <Add v-if="currentView === 'add'" />
+      <Add
+          @added="setView('list')"
+          v-if="currentView === 'add'" />
     </div>
     <div
         class="layer__list">
