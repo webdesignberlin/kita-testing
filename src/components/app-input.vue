@@ -39,29 +39,5 @@ const update = (event) => emit('update:modelValue', event.target.value);
 </template>
 
 <style lang="scss" scoped>
-.field {
-  display: block;
-  margin: 2rem 0;
-  text-align: left;
-
-  &__text {
-    display: block;
-  }
-
-  &__input {
-    // appearance: none;
-    -webkit-appearance: none;
-    height: 3rem;
-    color: inherit;
-    padding: 0.6rem 1rem;
-    width: 100%;
-    border: none;
-    border-radius: 10px;
-    background: #F7F4EA;
-    box-shadow: inset 8px 8px 16px #d9d7ce,
-    inset -8px -8px 16px #ffffff;
-    font-size: 1rem;
-    font-family: inherit;
-  }
-}
+@import '../assets/input-fields.scss';
 </style>
