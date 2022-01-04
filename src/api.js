@@ -9,6 +9,7 @@ import {
   query,
   orderBy,
 } from 'firebase/firestore';
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_APP_API_KEY,
@@ -22,6 +23,17 @@ const firebaseConfig = {
 export const instance = initializeApp(firebaseConfig);
 export const db = getFirestore(instance);
 enableIndexedDbPersistence(db);
+
+export const auth = getAuth();
+export const signIn = (email, password) => signInWithEmailAndPassword(auth, email, password);
+/**
+ * .then((res) => {
+  updateProfile(auth.currentUser, {
+    displayName: 'Jasmin',
+  })
+  return res;
+})
+ */
 
 export const getProviders = async () => await getDocs(collection(db, 'providers'));
 // export const getTests = await getDocs(collection(db, 'tests'));
@@ -61,6 +73,9 @@ export const addTest = async ({ date, providerId } = {}) => {
   console.log(doc.data());
   console.log(`${doc.id} => ${doc.data()}`);
 }); */
+
+// export const userLoggedOut = (cb) => onAuthStateChanged(auth, () => cb);
+export const onAuthStateChange = (cb) => onAuthStateChanged(auth, user => cb(user));
 
 export default {
   providers,

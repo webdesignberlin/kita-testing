@@ -1,6 +1,6 @@
 <script setup>
-import { ref, defineEmits } from 'vue';
-import { providers, addTest } from '../api.js';
+import { ref, defineEmits, computed } from 'vue';
+import { providers, addTest, auth } from '../api.js';
 import AppInput from '../components/app-input.vue';
 import AppSelect from '../components/app-select.vue';
 const emit = defineEmits(['added'])
@@ -19,11 +19,13 @@ const submit = () => {
   addTest(model.value);
   emit('added');
 };
+const userName = computed(() => auth.currentUser?.displayName);
 </script>
 <template>
   <form
       class="form"
       @submit.prevent="submit()">
+    <h1 class="form__title">Hallo, {{ userName }}</h1>
     <app-input
       label="Datum"
       v-model="model.date"
@@ -37,8 +39,12 @@ const submit = () => {
     <button>Speichern</button>
   </form>
 </template>
-<style>
+<style lang="scss" scoped>
 .form {
   width: 100%;
+  max-width: 24rem;
+  &__title {
+    font-size: 2rem;
+  }
 }
 </style>

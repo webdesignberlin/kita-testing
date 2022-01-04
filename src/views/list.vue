@@ -24,7 +24,7 @@ providers().then((res) => {
   </section>
 </template>
 
-<style>
+<style lang="scss" scoped>
 .item {
   padding: 2rem;
   margin: 2rem;
@@ -37,21 +37,12 @@ providers().then((res) => {
   background: #75C9C8;
   box-shadow: inset 8px 8px 16px #67b1b0,
   inset -8px -8px 16px #83e1e0;
-  /* display: grid;
-  grid-template-columns: 14ch 1fr; */
-}
-.item__provider,
-.item__date {
-  font-size: inherit;
-}
-.item__provider {
-  font-size: 1rem;
-}
-.item__dateFoo {
-  position: absolute;
-  bottom: 0;
-  right: 1rem;
-  transform: translate3d(0, calc(50%), 0);
-  margin: 0;
+
+  &__provider {
+    font-size: 1rem;
+  }
+  &__date {
+    font-size: inherit;
+  }
 }
 </style>
