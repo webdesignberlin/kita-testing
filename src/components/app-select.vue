@@ -63,5 +63,6 @@ const update = (event) => emit('update:modelValue', event.target.value);
   background: #F7F4EA;
   box-shadow: inset 8px 8px 16px #d9d7ce,
   inset -8px -8px 16px #ffffff;
+  font-size: 1rem;
 }
 </style>

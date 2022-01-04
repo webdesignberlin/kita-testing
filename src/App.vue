@@ -19,7 +19,7 @@ const setView = (name) => {
       <button
           class="layer__button"
           v-if="currentView !== 'add'"
-          @click="setView('add')">+</button>
+          @click="setView('add')"><span class="icon">+</span></button>
       <Add
           @added="setView('list')"
           v-if="currentView === 'add'" />
@@ -29,7 +29,14 @@ const setView = (name) => {
       <button
           class="layer__button layer__button--list"
           v-if="currentView !== 'list'"
-          @click="setView('list')">☰</button>
+          @click="setView('list')">
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="#444"
+            class="icon"
+            viewBox="0 0 32 32">
+          <path d="M4 10h24a2 2 0 000-4H4a2 2 0 000 4zm24 4H4a2 2 0 000 4h24a2 2 0 000-4zm0 8H4a2 2 0 000 4h24a2 2 0 000-4z"/></svg>
+      </button>
       <List v-if="currentView === 'list'" />
     </div>
   </div>
@@ -44,7 +51,8 @@ html {
   margin: 0;
 }
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -120,5 +128,11 @@ button:hover {
   background: linear-gradient(145deg, #dedcd3, #fffffa);
   box-shadow:  8px 8px 16px #d9d7ce,
   -8px -8px 16px #ffffff;
+}
+
+.icon {
+  fill: currentColor;
+  width: 2rem;
+  height: 2rem;
 }
 </style>
