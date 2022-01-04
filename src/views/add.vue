@@ -1,5 +1,6 @@
 <script setup>
 import { ref, defineEmits, computed } from 'vue';
+import { useStorage } from '@vueuse/core';
 import { providers, addTest, auth } from '../api.js';
 import AppInput from '../components/app-input.vue';
 import AppSelect from '../components/app-select.vue';
@@ -11,12 +12,14 @@ providers().then((res) => {
     text: item.name,
   }));
 });
+const lastProviderId = useStorage('lastProviderId', null);
 const model = ref({
-  providerId: null,
+  providerId: lastProviderId.value,
   date: new Date().toISOString().slice(0,16),
 });
 const submit = () => {
   addTest(model.value);
+  lastProviderId.value = model.value.providerId;
   emit('added');
 };
 const userName = computed(() => auth.currentUser?.displayName);
