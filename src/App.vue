@@ -122,6 +122,10 @@ button:hover {
   width: 2rem;
   height: 2rem;
 }
+
+button {
+  font-size: 1rem;
+}
 </style>
 
 <style lang="scss" scoped>

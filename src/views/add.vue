@@ -44,7 +44,8 @@ const userName = computed(() => auth.currentUser?.displayName);
   width: 100%;
   max-width: 24rem;
   &__title {
-    font-size: 2rem;
+    font-size: 1.2rem;
+    margin: 0 0 0.4rem 0;
   }
 }
 </style>
