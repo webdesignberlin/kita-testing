@@ -62,10 +62,11 @@ export const tests = async () => {
   });
 };
 
-export const addTest = async ({ date, providerId } = {}) => {
+export const addTest = async ({ date, providerId, userId } = {}) => {
   await addDoc(collection(db, 'tests'), {
     date,
     provider: doc(db, `/providers/${providerId}`),
+    userId,
   });
   tests();
 }

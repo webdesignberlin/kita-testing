@@ -16,6 +16,7 @@ const lastProviderId = useStorage('lastProviderId', null);
 const model = ref({
   providerId: lastProviderId.value,
   date: new Date().toISOString().slice(0,16),
+  userId: auth.currentUser.uid,
 });
 const submit = () => {
   addTest(model.value);
