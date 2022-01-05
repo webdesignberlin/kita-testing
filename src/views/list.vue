@@ -2,9 +2,9 @@
 import { ref } from 'vue';
 import { tests, providers } from '../api.js';
 const results = ref([]);
-const provs = ref([]);
+const providerList = ref([]);
 providers().then((res) => {
-  provs.value = res;
+  providerList.value = res;
   tests().then((res) => {
     results.value = res;
   });
@@ -20,7 +20,7 @@ providers().then((res) => {
       month: '2-digit',
       year: '2-digit',
     }).format(Date.parse(test.date)) }}</h1>
-    <p class="item__provider">{{ provs.find((prov) => prov.id === test.providerId ).name }}</p>
+    <p class="item__provider">{{ providerList.find((prov) => prov.id === test.providerId ).name }}</p>
   </section>
 </template>
 
