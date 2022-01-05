@@ -5,9 +5,9 @@ import { providers, addTest, auth } from '../api.js';
 import AppInput from '../components/app-input.vue';
 import AppSelect from '../components/app-select.vue';
 const emit = defineEmits(['added'])
-const provs = ref([]);
+const providerList = ref([]);
 providers().then((res) => {
-  provs.value = res.map((item) => ({
+  providerList.value = res.map((item) => ({
     value: item.id,
     text: item.name,
   }));
@@ -37,7 +37,7 @@ const userName = computed(() => auth.currentUser?.displayName);
     />
     <app-select
         v-model="model.providerId"
-        :items="provs"
+        :items="providerList"
         label="Hersteller"
     />
     <button>Speichern</button>
