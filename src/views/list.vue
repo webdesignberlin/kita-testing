@@ -1,9 +1,8 @@
 <script setup>
 import { computed, ref } from 'vue';
-import { tests } from '../api.js';
+import { tests } from '../use/tests.js';
 import { providers } from '../use/providers';
-const results = ref([]);
-const list = computed(() => results.value.map((item) => ({
+const list = computed(() => tests.value.map((item) => ({
   ...item,
   uiDate: new Intl.DateTimeFormat('de-DE', {
     day: '2-digit',
@@ -12,9 +11,6 @@ const list = computed(() => results.value.map((item) => ({
   }).format(Date.parse(item.date)),
   providerName: providers.value?.find((prov) => prov?.id === item?.providerId)?.name,
 })))
-tests().then((res) => {
-  results.value = res;
-});
 </script>
 <template>
   <section

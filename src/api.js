@@ -47,22 +47,7 @@ export const signIn = (email, password) => signInWithEmailAndPassword(auth, emai
  */
 export const getProviders = query(collection(db, 'providers'));
 // export const getTests = await getDocs(collection(db, 'tests'));
-export const getTests = async () => await getDocs(query(collection(db, 'tests'), orderBy('date', 'desc')));
-export const tests = async () => {
-  const coll = await getTests();
-  const docs = coll.docs;
-  return docs.map((doc) => {
-    const {
-      provider,
-      date,
-    } = doc.data();
-    return {
-      id: doc.id,
-      date,
-      providerId: provider.id,
-    };
-  });
-};
+export const testsQuery = query(collection(db, 'tests'), orderBy('date', 'desc'));
 
 export const addTest = async ({ date, providerId, userId } = {}) => {
   await addDoc(collection(db, 'tests'), {
@@ -70,8 +55,7 @@ export const addTest = async ({ date, providerId, userId } = {}) => {
     provider: doc(db, `/providers/${providerId}`),
     userId,
   });
-  tests();
-}
+};
 /* providers.forEach((doc) => {
   console.log(doc.data());
   console.log(`${doc.id} => ${doc.data()}`);
@@ -80,8 +64,5 @@ export const addTest = async ({ date, providerId, userId } = {}) => {
 // export const userLoggedOut = (cb) => onAuthStateChanged(auth, () => cb);
 export const onAuthStateChange = (cb) => onAuthStateChanged(auth, user => cb(user));
 
-export default {
-  tests,
-  getProviders,
-}
+// export default {}
 // const user = useFirestore(db.collection('users').doc('my-user-id'))
