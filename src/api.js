@@ -35,17 +35,9 @@ export const signIn = (email, password) => signInWithEmailAndPassword(auth, emai
 })
  */
 
-export const getProviders = async () => await getDocs(collection(db, 'providers'));
+export const getProviders = query(collection(db, 'providers'));
 // export const getTests = await getDocs(collection(db, 'tests'));
 export const getTests = async () => await getDocs(query(collection(db, 'tests'), orderBy('date', 'desc')));
-export const providers = async () => {
-  const providers = await getProviders();
-  const docs = providers.docs;
-  return docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  }));
-};
 export const tests = async () => {
   const coll = await getTests();
   const docs = coll.docs;
@@ -79,7 +71,7 @@ export const addTest = async ({ date, providerId, userId } = {}) => {
 export const onAuthStateChange = (cb) => onAuthStateChanged(auth, user => cb(user));
 
 export default {
-  providers,
   tests,
+  getProviders,
 }
 // const user = useFirestore(db.collection('users').doc('my-user-id'))

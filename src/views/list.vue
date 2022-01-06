@@ -1,26 +1,28 @@
 <script setup>
-import { ref } from 'vue';
-import { tests, providers } from '../api.js';
+import { computed, ref } from 'vue';
+import { tests } from '../api.js';
+import { providers } from '../use/providers';
 const results = ref([]);
-const providerList = ref([]);
-providers().then((res) => {
-  providerList.value = res;
-  tests().then((res) => {
-    results.value = res;
-  });
+const list = computed(() => results.value.map((item) => ({
+  ...item,
+  uiDate: new Intl.DateTimeFormat('de-DE', {
+    day: '2-digit',
+    month: '2-digit',
+    year: '2-digit',
+  }).format(Date.parse(item.date)),
+  providerName: providers.value?.find((prov) => prov?.id === item?.providerId)?.name,
+})))
+tests().then((res) => {
+  results.value = res;
 });
 </script>
 <template>
   <section
       class="item"
-      v-for="test in results"
+      v-for="test in list"
       :key="test.date">
-    <h1 class="item__date">{{ new Intl.DateTimeFormat('de-DE', {
-      day: '2-digit',
-      month: '2-digit',
-      year: '2-digit',
-    }).format(Date.parse(test.date)) }}</h1>
-    <p class="item__provider">{{ providerList.find((prov) => prov.id === test.providerId ).name }}</p>
+    <h1 class="item__date">{{ test.uiDate }}</h1>
+    <p class="item__provider">{{ test.providerName }}</p>
   </section>
 </template>
 

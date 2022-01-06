@@ -1,10 +1,11 @@
 <script setup>
-import { ref, defineEmits } from 'vue';
+import { ref, defineEmits, computed } from 'vue';
 import { useStorage, useVibrate } from '@vueuse/core';
-import { providers, addTest, auth } from '../api.js';
+import { addTest } from '../api.js';
 import AppInput from '../components/app-input.vue';
 import AppSelect from '../components/app-select.vue';
 import { useUser } from '../use/user';
+import { providers } from '../use/providers';
 
 /**
  * Info if Form is successfully submitted
@@ -15,13 +16,10 @@ const {
   userId,
   userName,
 } = useUser();
-const providerList = ref([]);
-providers().then((res) => {
-  providerList.value = res.map((item) => ({
-    value: item.id,
-    text: item.name,
-  }));
-});
+const providerList = computed(() => providers.value.map((item) => ({
+  value: item.id,
+  text: item.name,
+})));
 const lastProviderId = useStorage('lastProviderId', null);
 const model = ref({
   providerId: lastProviderId.value,
