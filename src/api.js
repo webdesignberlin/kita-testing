@@ -35,6 +35,10 @@ export const signIn = (email, password) => signInWithEmailAndPassword(auth, emai
 })
  */
 
+/**
+ * Provider Query
+ * @type {Query<DocumentData>}
+ */
 export const getProviders = query(collection(db, 'providers'));
 // export const getTests = await getDocs(collection(db, 'tests'));
 export const getTests = async () => await getDocs(query(collection(db, 'tests'), orderBy('date', 'desc')));
