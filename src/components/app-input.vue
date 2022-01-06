@@ -1,10 +1,12 @@
 <script setup>
 import { defineProps, defineEmits } from 'vue';
 
+/**
+ * App Input Emits
+ * @type {EmitFn<string[]>}
+ */
 const emit = defineEmits([
   'update:modelValue',
-  'input:modelValue',
-  'change:modelValue',
 ]);
 
 defineProps({

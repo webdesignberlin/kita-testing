@@ -3,8 +3,6 @@ import { defineProps, defineEmits } from 'vue';
 
 const emit = defineEmits([
   'update:modelValue',
-  'input:modelValue',
-  'change:modelValue',
 ]);
 
 defineProps({
