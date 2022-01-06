@@ -1,6 +1,6 @@
 <script setup>
 import { ref, defineEmits } from 'vue';
-import { useStorage } from '@vueuse/core';
+import { useStorage, useVibrate } from '@vueuse/core';
 import { providers, addTest, auth } from '../api.js';
 import AppInput from '../components/app-input.vue';
 import AppSelect from '../components/app-select.vue';
@@ -28,10 +28,16 @@ const model = ref({
   date: new Date().toISOString().slice(0,16),
   userId: userId,
 });
-const submit = () => {
-  addTest(model.value);
-  lastProviderId.value = model.value.providerId;
-  emit('added');
+const { vibrate: vibrateSuccess } = useVibrate({ pattern: [250] });
+const submit = async () => {
+  try {
+    await addTest(model.value);
+    lastProviderId.value = model.value.providerId;
+    vibrateSuccess();
+    emit('added');
+  } catch(e) {
+    console.log('@TODO', e);
+  }
 };
 </script>
 <template>
