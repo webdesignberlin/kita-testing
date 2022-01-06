@@ -10,9 +10,9 @@ const model = ref({
 });
 const submit = async () => {
   try {
-    const result = await signIn(model.value.email, model.value.password);
+    await signIn(model.value.email, model.value.password);
     error.value = null;
-    emit('logged-in', result.user.displayName);
+    emit('logged-in');
   } catch (e) {
     error.value = e.message;
   }

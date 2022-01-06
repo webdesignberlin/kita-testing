@@ -1,10 +1,9 @@
 <script setup>
 import { ref } from 'vue';
-import { useStorage } from '@vueuse/core';
-import { onAuthStateChange } from './api';
 import Login from './views/login.vue';
 import Add from './views/add.vue';
 import List from './views/list.vue';
+import { useUser } from './use/user';
 
 /**
  * @typedef {'dashboard'|'add'|'list'} ViewNames
@@ -15,7 +14,9 @@ import List from './views/list.vue';
  * @type {Ref<UnwrapRef<ViewNames>>}
  */
 const currentView = ref('dashboard');
-const user = useStorage('user', null);
+const {
+  userId,
+} = useUser();
 /**
  * Set view
  * @param {ViewNames} name
@@ -24,18 +25,9 @@ const setView = (name) => {
   currentView.value = name;
 };
 
-const handleUserLogin = (userName) => {
-  user.value = userName;
+const handleUserLogin = () => {
   setView('add');
 }
-
-onAuthStateChange((userLoggedIn) => {
-  if (userLoggedIn) {
-    user.value = userLoggedIn.displayName;
-  } else {
-    user.value = null;
-  }
-});
 </script>
 
 <template>
@@ -43,7 +35,7 @@ onAuthStateChange((userLoggedIn) => {
       :class="`layer--${currentView}`"
       class="layer">
     <div
-        v-if="!user"
+        v-if="!userId"
         @click="setView('dashboard')"
         class="layer__add">
       <Login

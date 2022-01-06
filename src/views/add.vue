@@ -1,10 +1,20 @@
 <script setup>
-import { ref, defineEmits, computed } from 'vue';
+import { ref, defineEmits } from 'vue';
 import { useStorage } from '@vueuse/core';
 import { providers, addTest, auth } from '../api.js';
 import AppInput from '../components/app-input.vue';
 import AppSelect from '../components/app-select.vue';
+import { useUser } from '../use/user';
+
+/**
+ * Info if Form is successfully submitted
+ * @type {EmitFn<string[]>}
+ */
 const emit = defineEmits(['added'])
+const {
+  userId,
+  userName,
+} = useUser();
 const providerList = ref([]);
 providers().then((res) => {
   providerList.value = res.map((item) => ({
@@ -16,14 +26,13 @@ const lastProviderId = useStorage('lastProviderId', null);
 const model = ref({
   providerId: lastProviderId.value,
   date: new Date().toISOString().slice(0,16),
-  userId: auth.currentUser.uid,
+  userId: userId,
 });
 const submit = () => {
   addTest(model.value);
   lastProviderId.value = model.value.providerId;
   emit('added');
 };
-const userName = computed(() => auth.currentUser?.displayName);
 </script>
 <template>
   <form
