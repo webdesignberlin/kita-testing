@@ -5,11 +5,11 @@ import {
   getDocs,
   addDoc,
   doc,
-  enableIndexedDbPersistence,
+  // enableIndexedDbPersistence,
   query,
   orderBy,
 } from 'firebase/firestore';
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_APP_API_KEY,
@@ -22,9 +22,15 @@ const firebaseConfig = {
 
 export const instance = initializeApp(firebaseConfig);
 export const db = getFirestore(instance);
-enableIndexedDbPersistence(db);
+// enableIndexedDbPersistence(db);
 
 export const auth = getAuth();
+/**
+ * User Auth
+ * @param {string} email
+ * @param {string} password
+ * @return {Promise<UserCredential>}
+ */
 export const signIn = (email, password) => signInWithEmailAndPassword(auth, email, password);
 /**
  * .then((res) => {
