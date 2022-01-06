@@ -78,4 +78,4 @@ export const addTest = async ({ date, providerId, userId } = {}) => {
  * @param cb
  * @return {Unsubscribe}
  */
-export const onAuthStateChange = (cb) => onAuthStateChanged(auth, user => cb(user));
+export const onAuthStateChange = (cb) => onAuthStateChanged(auth, (user) => cb(user));

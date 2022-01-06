@@ -26,3 +26,7 @@ onSnapshot(testsQuery, (querySnapshot) => {
   });
   tests.value = tempTests;
 });
+
+export default {
+  tests,
+};

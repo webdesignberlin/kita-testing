@@ -21,3 +21,7 @@ onSnapshot(providersQuery, (querySnapshot) => {
   });
   providers.value = tempProvider;
 });
+
+export default {
+  providers,
+};

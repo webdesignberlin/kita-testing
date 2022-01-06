@@ -1,5 +1,5 @@
 import { computed, ref } from 'vue';
-import { onAuthStateChange } from '../api.js';
+import { onAuthStateChange } from '../api';
 
 /**
  * Get User Information
@@ -9,10 +9,8 @@ export const useUser = () => {
   const user = ref(null);
   onAuthStateChange((userLoggedIn) => {
     if (userLoggedIn) {
-      console.log('userLoggedIn', userLoggedIn);
       user.value = userLoggedIn;
     } else {
-      console.log('userLogged Out');
       user.value = null;
     }
   });
