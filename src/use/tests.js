@@ -2,7 +2,15 @@ import { onSnapshot } from 'firebase/firestore';
 import { ref } from 'vue';
 import { testsQuery } from '../api';
 
+/**
+ * List of mapped Tests
+ * @type {Ref<UnwrapRef<*[]>>}
+ */
 export const tests = ref([]);
+
+/**
+ * Watch for Changes, Update Tests
+ */
 onSnapshot(testsQuery, (querySnapshot) => {
   const tempTests = [];
   querySnapshot.forEach((doc) => {

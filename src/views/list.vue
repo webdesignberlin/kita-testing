@@ -2,6 +2,11 @@
 import { computed, ref } from 'vue';
 import { tests } from '../use/tests.js';
 import { providers } from '../use/providers';
+
+/**
+ * Test-List mapped for UI
+ * @type {ComputedRef<(*&{uiDate: string, providerName: *})[]>}
+ */
 const list = computed(() => tests.value.map((item) => ({
   ...item,
   uiDate: new Intl.DateTimeFormat('de-DE', {
