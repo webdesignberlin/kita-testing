@@ -1,9 +1,9 @@
 import { onSnapshot } from 'firebase/firestore';
 import { ref } from 'vue';
-import { getProviders } from '../api';
+import { providersQuery } from '../api';
 
 export const providers = ref([]);
-onSnapshot(getProviders, (querySnapshot) => {
+onSnapshot(providersQuery, (querySnapshot) => {
   const tempProvider = [];
   querySnapshot.forEach((doc) => {
     tempProvider.push({

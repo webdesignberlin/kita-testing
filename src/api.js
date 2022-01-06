@@ -2,7 +2,6 @@ import { initializeApp } from 'firebase/app';
 import {
   collection,
   getFirestore,
-  getDocs,
   addDoc,
   doc,
   // enableIndexedDbPersistence,
@@ -20,13 +19,26 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_APP_APP_ID,
 };
 
+/**
+ * Firebase Instance
+ * @type {FirebaseApp}
+ */
 export const instance = initializeApp(firebaseConfig);
+/**
+ * Firestore Instance
+ * @type {Firestore}
+ */
 export const db = getFirestore(instance);
 // enableIndexedDbPersistence(db);
 
-export const auth = getAuth();
 /**
- * User Auth
+ * Firebase User Auth Instance
+ * @type {Auth}
+ */
+export const auth = getAuth();
+
+/**
+ * User SignIn
  * @param {string} email
  * @param {string} password
  * @return {Promise<UserCredential>}
@@ -45,8 +57,12 @@ export const signIn = (email, password) => signInWithEmailAndPassword(auth, emai
  * Provider Query
  * @type {Query<DocumentData>}
  */
-export const getProviders = query(collection(db, 'providers'));
-// export const getTests = await getDocs(collection(db, 'tests'));
+export const providersQuery = query(collection(db, 'providers'));
+
+/**
+ * Tests Query
+ * @type {Query<DocumentData>}
+ */
 export const testsQuery = query(collection(db, 'tests'), orderBy('date', 'desc'));
 
 export const addTest = async ({ date, providerId, userId } = {}) => {
@@ -56,13 +72,10 @@ export const addTest = async ({ date, providerId, userId } = {}) => {
     userId,
   });
 };
-/* providers.forEach((doc) => {
-  console.log(doc.data());
-  console.log(`${doc.id} => ${doc.data()}`);
-}); */
 
-// export const userLoggedOut = (cb) => onAuthStateChanged(auth, () => cb);
+/**
+ * Watch on User changes like sign-in, sign-out
+ * @param cb
+ * @return {Unsubscribe}
+ */
 export const onAuthStateChange = (cb) => onAuthStateChanged(auth, user => cb(user));
-
-// export default {}
-// const user = useFirestore(db.collection('users').doc('my-user-id'))
