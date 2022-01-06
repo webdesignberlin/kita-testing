@@ -172,6 +172,7 @@ button {
     padding: 2rem;
     place-items: center;
     overflow: scroll;
+    overscroll-behavior: contain;
     background: #75C9C8;
     height: var(--layer-list-size);
     transition: height 0.4s ease;
