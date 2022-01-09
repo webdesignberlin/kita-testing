@@ -4,7 +4,7 @@ import { useStorage, useVibrate } from '@vueuse/core';
 import { addTest } from '../api.js';
 import AppInput from '../components/app-input.vue';
 import AppSelect from '../components/app-select.vue';
-import { useUser } from '../use/user';
+import { userId, userName } from '../use/user';
 import { providers } from '../use/providers';
 
 /**
@@ -12,10 +12,6 @@ import { providers } from '../use/providers';
  * @type {EmitFn<string[]>}
  */
 const emit = defineEmits(['added'])
-const {
-  userId,
-  userName,
-} = useUser();
 const providerList = computed(() => providers.value.map((item) => ({
   value: item.id,
   text: item.name,

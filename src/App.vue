@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import Login from './views/login.vue';
 import Add from './views/add.vue';
 import List from './views/list.vue';
-import { useUser } from './use/user';
+import { userId } from './use/user';
 
 /**
  * @typedef {'dashboard'|'add'|'list'} ViewNames
@@ -14,9 +14,6 @@ import { useUser } from './use/user';
  * @type {Ref<UnwrapRef<ViewNames>>}
  */
 const currentView = ref('dashboard');
-const {
-  userId,
-} = useUser();
 /**
  * Set view
  * @param {ViewNames} name
