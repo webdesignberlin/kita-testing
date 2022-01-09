@@ -7,11 +7,7 @@ import { providersQuery } from '../api';
  * @type {Ref<UnwrapRef<*[]>>}
  */
 export const providers = ref([]);
-
-/**
- * Watch Provider Data, Update Provider List
- */
-onSnapshot(providersQuery, (querySnapshot) => {
+export const updateProviders = (querySnapshot) => {
   const tempProvider = [];
   querySnapshot.forEach((doc) => {
     tempProvider.push({
@@ -20,7 +16,12 @@ onSnapshot(providersQuery, (querySnapshot) => {
     });
   });
   providers.value = tempProvider;
-});
+};
+
+/**
+ * Watch Provider Data, Update Provider List
+ */
+onSnapshot(providersQuery, { next: (querySnapshot) => updateProviders(querySnapshot)});
 
 export default {
   providers,
