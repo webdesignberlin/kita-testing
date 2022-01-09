@@ -1,0 +1,3 @@
+// Vitest Snapshot v1
+
+exports[`mount component 1`] = `"<label class=\\"field\\" data-v-46a1db84=\\"\\"><span class=\\"field__text\\" data-v-46a1db84=\\"\\"></span><input type=\\"password\\" class=\\"field__input\\" data-v-46a1db84=\\"\\" /></label>"`;

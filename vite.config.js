@@ -1,3 +1,5 @@
+/// <reference types="vitest" />
+
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue';
 import { VitePWA } from 'vite-plugin-pwa';
@@ -34,5 +36,30 @@ export default defineConfig({
         ]
       }
     }),
-  ]
+  ],
+  test: {
+    global: true,
+    environment: 'happy-dom',
+    // include: ['src/**/*.js', 'tests/unit/*.spec.js'],
+    exclude: ['src/api.js', 'node_modules'],
+    deps: {
+      inline: ['@vue', '@vueuse'],
+      // inline: ['@vue', '@vueuse', 'firebase/auth', 'firebase/app', 'firebase/firestore'],
+    },
+    coverage: {
+      enabled: true,
+      excludeNodeModules: true,
+      // include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+      clean: true,
+      exclude: ['node_modules', 'tests', 'coverage', 'src/api.js'],
+      skipFull: false,
+      reporter: ['text'],
+      /* reporter: [
+          'clover',
+          'json-summary',
+          'text',
+          'html',
+      ], */
+    },
+  },
 });
