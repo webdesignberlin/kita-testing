@@ -2,9 +2,28 @@ import { expect, describe, test, vi } from 'vitest';
 import { providers, updateProviders } from '../../../../src/use/providers';
 
 vi.mock('firebase/firestore', async () => {
-  const api = await vi.importActual('firebase/firestore');
+  // const api = await vi.importActual('firebase/firestore');
   return {
-    ...api,
+    // ...api,
+    onSnapshot: vi
+      .fn((source = 'foo', { next: cb = (data) => (data)}) => {
+        return cb([
+          {
+            id: '1',
+            data: () => ({
+              name: 'test provider 1',
+            })
+          }
+        ])
+      }),
+  };
+});
+
+vi.mock('../../../../src/api', async () => {
+  // const api = await vi.importActual('firebase/firestore');
+  return {
+    // ...api,
+    db: vi.fn(),
     onSnapshot: vi
       .fn((source = 'foo', { next: cb = (data) => (data)}) => {
         return cb([

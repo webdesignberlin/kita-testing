@@ -22,7 +22,3 @@ export const updateProviders = (querySnapshot) => {
  * Watch Provider Data, Update Provider List
  */
 onSnapshot(providersQuery, { next: (querySnapshot) => updateProviders(querySnapshot)});
-
-export default {
-  providers,
-};
