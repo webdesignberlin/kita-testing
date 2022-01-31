@@ -36,6 +36,7 @@ const handleUserLogin = () => {
         @click="setView('dashboard')"
         class="layer__add">
       <Login
+          data-test="login-form"
           v-if="currentView === 'dashboard'"
           @logged-in="handleUserLogin"
       />
@@ -50,6 +51,7 @@ const handleUserLogin = () => {
         <span class="icon">+</span>
       </button>
       <Add
+          data-test="add-form"
           @added="setView('list')"
           v-if="currentView === 'add'" />
     </div>
@@ -58,6 +60,7 @@ const handleUserLogin = () => {
       <button
           class="layer__button layer__button--list"
           v-if="currentView !== 'list'"
+          data-test="show-list"
           @click="setView('list')">
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -66,7 +69,11 @@ const handleUserLogin = () => {
             viewBox="0 0 32 32">
           <path d="M4 10h24a2 2 0 000-4H4a2 2 0 000 4zm24 4H4a2 2 0 000 4h24a2 2 0 000-4zm0 8H4a2 2 0 000 4h24a2 2 0 000-4z"/></svg>
       </button>
-      <List v-if="currentView === 'list'" />
+      <div
+          v-if="currentView === 'list'"
+          data-test="tests-list">
+        <List />
+      </div>
     </div>
   </div>
 </template>
@@ -173,6 +180,12 @@ button {
     background: #75C9C8;
     height: var(--layer-list-size);
     transition: height 0.4s ease;
+
+    // just a wrapper for web tests
+    > div {
+      // all: unset;
+      display: contents
+    }
   }
 }
 </style>

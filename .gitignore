@@ -9,3 +9,5 @@ dist-ssr
 
 # tests
 coverage
+test-results/
+playwright-report/

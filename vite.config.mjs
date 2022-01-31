@@ -38,12 +38,13 @@ export default defineConfig({
     }),
   ],
   test: {
-    global: true,
+    globals: true,
     environment: 'happy-dom',
-    // include: ['src/**/*.js', 'tests/unit/*.spec.js'],
-    exclude: ['src/api.js', 'node_modules'],
+    include: ['tests/unit/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+    // include: ['src/**/*.js'],
+    // exclude: ['src/api.js', 'node_modules'],
     deps: {
-      inline: ['@vue', '@vueuse'],
+      // inline: ['@vue', '@vueuse'],
       // inline: ['@vue', '@vueuse', 'firebase/auth', 'firebase/app', 'firebase/firestore'],
     },
     coverage: {
@@ -51,9 +52,9 @@ export default defineConfig({
       excludeNodeModules: true,
       // include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
       clean: true,
-      exclude: ['node_modules', 'tests', 'coverage', 'src/api.js'],
+      // exclude: ['node_modules', 'tests', 'coverage', 'src/api.js'],
       skipFull: false,
-      reporter: ['text'],
+      // reporter: ['text'],
       /* reporter: [
           'clover',
           'json-summary',
